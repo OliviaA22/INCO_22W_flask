@@ -2,7 +2,7 @@
 
 # load_dotenv()
 
-from flask import Flask
+from flask import Flask, render_template
 import json
 
 
@@ -12,6 +12,18 @@ with open("PatientData.json") as f:
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
-    return str(data)
+def hospital():
+    wards = list(set([patient["Ward"] for patient in data]))
+    return render_template(
+        "wards.html",
+        data = wards,
+    )
+
+@app.route('/<string:ward>')
+def wards(ward):
+    filtered_data = [patient for patient in data if patient["Ward"] == ward]
+    return render_template(
+        "patients.html",
+        data = filtered_data,
+    )
 
