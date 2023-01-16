@@ -11,11 +11,14 @@ with open("PatientData.json") as f:
     
 def set_medication_status(data):
     for patient in data:
-        if patient['prescribed'] == patient['given']:
+        if patient['given'] == 0:
+            patient['status'] = 'red' 
+        elif patient['prescribed'] == patient['given']:
             patient['status'] = 'green'
-         elif (...)
+        else:
+            patient['status'] = 'orange'
         
-    return data
+     return data
 
 data = set_medication_status(data)
 
