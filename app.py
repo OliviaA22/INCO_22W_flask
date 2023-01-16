@@ -8,6 +8,16 @@ import json
 
 with open("PatientData.json") as f:
     data = json.load(f)
+    
+def set_medication_status(data):
+    for patient in data:
+        if patient['prescribed'] == patient['given']:
+            patient['status'] = 'green'
+         elif (...)
+        
+    return data
+
+data = set_medication_status(data)
 
 app = Flask(__name__)
 
